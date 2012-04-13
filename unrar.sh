@@ -36,7 +36,7 @@ function unrar_files () {
 
 function scanrars () {
 	log "Scanning $1/$2 for rars"
-	for k in `find "$1/$2" -iname "*.rar" -print`
+	for k in `find "$1/$2" -iname "*.rar" -print0`
 	do
 		log "Found rar file $k"
 		unrar_files "$1" "$k"
@@ -48,7 +48,7 @@ function scanfiles () {
 	log "Scanning $1/$2 for: $COPY_SERIES"
 	for i in $COPY_SERIES
 	do
-		for m in `find "$1/$2" -iname "*.$i" -print | grep -iv sample`
+		for m in `find "$1/$2" -iname "*.$i" -print0 | grep -iv sample`
 		do
 			BASENAME=`basename "$m"`
 			if [ ! -e "$1/$EXTRACT_DIR/$BASENAME" ]
