@@ -48,7 +48,7 @@ function scanfiles () {
 	log "Scanning $1/$2 for: $COPY_SERIES"
 	for i in $COPY_SERIES
 	do
-		for m in `find "$1/$2" -iname "*.$i" -print0 | grep -iv sample`
+		find "$1/$2" -iname "*.$i" -print0 | grep -ivzZ sample | while read -d $'\0' m
 		do
 			BASENAME=`basename "$m"`
 			if [ ! -e "$1/$EXTRACT_DIR/$BASENAME" ]
